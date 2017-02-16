@@ -156,7 +156,7 @@ L.Control.GeoSearch = L.Control.extend({
         if (XMLHttpRequest) {
             var xhr = new XMLHttpRequest();
 
-            if ('withCredentials' in xhr) {
+            if (!provider.forceJsonp && 'withCredentials' in xhr) {
                 var xhr = new XMLHttpRequest();
 
                 xhr.onreadystatechange = function () {
@@ -176,7 +176,7 @@ L.Control.GeoSearch = L.Control.extend({
 
                 xhr.open('GET', url, true);
                 xhr.send();
-            } else if (XDomainRequest) {
+            } else if (!provider.forceJsonp && XDomainRequest) {
                 var xdr = new XDomainRequest();
 
                 xdr.onerror = function (err) {
